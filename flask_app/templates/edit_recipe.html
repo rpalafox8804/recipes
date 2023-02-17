@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+<body class="bg-warning">
+    <div class="container">
+        <div class="nav d-flex justify-content-between p-3">
+            <div class="header_text col-4">
+                <h1>Edit recipe</h1>
+            </div>
+            <div class="links col-4 d-flex justify-content-around">
+                <a href="/recipe">Back to recipe</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+        <div class="form_area">
+
+            <div class="form_left d-flex">
+                <div class="register p-3 col-4 mx-auto bg-dark text-light">
+                    {% with messages = get_flashed_messages(category_filter = ['recipe']) %}
+                    {% if messages %}
+                    <div class="flash col-10 mx-auto p-3 bg-dark text-danger">
+                        {% for message in messages %}
+                                <p class="{{registration}}">{{message}}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                    <form action='/recipe/update/{{rec_id}}' method="post" class="p-3 col-10 mx-auto bg-dark text-light">        
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" id="name" value = "{{session['name']}}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea name="description" id="description" class="col-12" rows="3" >{{session['description']}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="instructions">Instructions:</label>
+                            <textarea name="instructions" id="instructions" class="col-12" rows="5">{{session['instructions']}}</textarea>
+                        </div>
+                </div>
+                <div class="form_right col-5 p-3 ">
+
+                        <div class="form-group">
+                            <label for="date_cooked">Date Cooked/Made:</label>
+                            <input type="date" name="date_cooked" id="date_cooked" value = "{{session['date_cooked']}}"class="form-control">
+                        </div>
+                        <div class="form-group" class="d-flex">
+                            <label for="under_thirty" >Under 30 minutes?</label>
+                            <div class="custom-control custom-checkbox">
+                                {% if session['under_thirty'] == 'Yes' %}
+                                <input type="radio" class="custom-control-input" value="Yes" name="under_thirty" id="under_thirty" required checked>
+                                {% else %}
+                                <input type="radio" class="custom-control-input" value="Yes" name="under_thirty" id="under_thirty" required>
+                                {% endif %}
+                                <label for="under_thirty" class="custom-control-input">Yes</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                {% if session['under_thirty'] == 'No' %}
+                                <input type="radio" class="custom-control-input" value="No" name="under_thirty" id="under_thirty" required checked>
+                                {% else %}
+                                <input type="radio" class="custom-control-input" value="No" name="under_thirty" id="under_thirty" required>
+                                {% endif %}
+                                <label for="under_thirty" class="custom-control-input">No</label>
+                            </div>
+                            
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-danger btn-outline-dark">
+                        </form>    
+                </div>
+                
+            </div>
+            
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+</body>
+</html>
